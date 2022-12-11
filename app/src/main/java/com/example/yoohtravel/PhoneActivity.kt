@@ -67,14 +67,14 @@ class PhoneActivity : AppCompatActivity() {
         auth.signInWithCredential(credential)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
-                    // Sign in success, update UI with the signed-in user's information
+                    // Успешная регистрация, обновление пользовательского интерфейса с информацией о зарегистрированном пользователе
 
                 } else {
-                    // Sign in failed, display a message and update the UI
+                    // Вход в систему не удался, выведите сообщение и обновите пользовательский интерфейс
                     if (task.exception is FirebaseAuthInvalidCredentialsException) {
-                        // The verification code entered was invalid
+                        // введенный проверочный код недействителен
                     }
-                    // Update UI
+                    // Обновление пользовательского интерфейса
                 }
             }
     }
@@ -82,39 +82,39 @@ class PhoneActivity : AppCompatActivity() {
     private val callbacks = object : PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
 
         override fun onVerificationCompleted(credential: PhoneAuthCredential) {
-            // This callback will be invoked in two situations:
-            // 1 - Instant verification. In some cases the phone number can be instantly
-            //     verified without needing to send or enter a verification code.
-            // 2 - Auto-retrieval. On some devices Google Play services can automatically
-            //     detect the incoming verification SMS and perform verification without
-            //     user action.
+            // Этот обратный вызов будет вызываться в двух ситуациях:
+            // 1 - Мгновенная проверка. В некоторых случаях номер телефона можно мгновенно // проверить.
+            // верифицирован без необходимости отправлять или вводить проверочный код.
+            // 2 - Автопоиск. На некоторых устройствах службы Google Play могут автоматически
+            // обнаруживать входящее проверочное SMS и выполнять проверку без // действия пользователя.
+            // действия пользователя.
             signInWithPhoneAuthCredential(credential)
         }
 
         override fun onVerificationFailed(e: FirebaseException) {
-            // This callback is invoked in an invalid request for verification is made,
-            // for instance if the the phone number format is not valid.
+            // Этот обратный вызов вызывается в случае некорректного запроса на проверку,
+            // например, если формат телефонного номера недействителен.
 
             if (e is FirebaseAuthInvalidCredentialsException) {
-                // Invalid request
+                // Неверный запрос
                 Log.d("TAG", "onVerificateFailer: ${e.toString()}")
             } else if (e is FirebaseTooManyRequestsException) {
-                // The SMS quota for the project has been exceeded
+                // Квота SMS для проекта превышена
                 Log.d("TAG", "onVerificateFailer: ${e.toString()}")
 
             }
 
-            // Show a message and update the UI
+            // Показать сообщение и обновить пользовательский интерфейс
         }
 
         override fun onCodeSent(
             verificationId: String,
             token: PhoneAuthProvider.ForceResendingToken
         ) {
-            // The SMS verification code has been sent to the provided phone number, we
-            // now need to ask the user to enter the code and then construct a credential
-            // by combining the code with a verification ID.
-            // Save verification ID and resending token so we can use them later
+            // Код проверки SMS был отправлен на указанный номер телефона, нам
+            // теперь нужно попросить пользователя ввести код, а затем создать
+            // комбинацию кода с идентификатором верификации.
+            // Сохраните идентификатор проверки и маркер повторной отправки, чтобы мы могли использовать их позже
             val intent = Intent(this@PhoneActivity, OTPActivity::class.java)
             intent.putExtra("OTP", verificationId)
             intent.putExtra("resendToken", token)

@@ -14,7 +14,8 @@
         android:layout_marginHorizontal="32dp"
         android:layout_marginTop="16dp"
         android:backgroundTint="@color/Blue"
-        android:text="Verify"
+        android:text="@string/OTP_submit"
+        app:cornerRadius="15dp"
         android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -25,37 +26,27 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
-        android:text="Resend OTP"
+        android:text="@string/sendcode_text"
+        android:textColor="@color/Blue"
         android:textSize="16sp"
-        android:textColor="@color/Gray"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@+id/verifyOTPBtn"
         app:layout_constraintTop_toTopOf="@+id/guideline5" />
 
     <EditText
         android:id="@+id/otpEditText1"
-        android:layout_width="45dp"
-        android:layout_height="45dp"
-        android:layout_marginStart="24dp"
-        android:background="@color/Blue"
-        android:hint="0"
-        android:textColorHint="@color/Blue_2"
-        android:ems="10"
-        android:gravity="center"
-        android:inputType="number"
+        android:autofillHints="postalCode"
+        android:hint="@string/otp_default_code"
         app:layout_constraintBottom_toTopOf="@+id/guideline5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline4" />
+        app:layout_constraintTop_toTopOf="@+id/guideline4"
+        android:layout_marginStart="24dp"
+        style="@style/default_code" />
 
     <EditText
         android:id="@+id/otpEditText2"
-        android:layout_width="45dp"
-        android:layout_height="45dp"
-        android:background="@color/Blue"
-        android:hint="0"
-        android:textColorHint="@color/Blue_2"
-        android:ems="10"
-        android:gravity="center"
-        android:inputType="number"
+        style="@style/default_code"
+        android:autofillHints="postalCode"
         app:layout_constraintBottom_toTopOf="@+id/guideline5"
         app:layout_constraintEnd_toStartOf="@+id/otpEditText3"
         app:layout_constraintHorizontal_bias="0.5"
@@ -64,14 +55,8 @@
 
     <EditText
         android:id="@+id/otpEditText3"
-        android:layout_width="45dp"
-        android:layout_height="45dp"
-        android:background="@color/Blue"
-        android:hint="0"
-        android:textColorHint="@color/Blue_2"
-        android:ems="10"
-        android:gravity="center"
-        android:inputType="number"
+        style="@style/default_code"
+        android:autofillHints="postalCode"
         app:layout_constraintBottom_toTopOf="@+id/guideline5"
         app:layout_constraintEnd_toStartOf="@+id/otpEditText4"
         app:layout_constraintHorizontal_bias="0.5"
@@ -80,14 +65,8 @@
 
     <EditText
         android:id="@+id/otpEditText4"
-        android:layout_width="45dp"
-        android:layout_height="45dp"
-        android:background="@color/Blue"
-        android:hint="0"
-        android:textColorHint="@color/Blue_2"
-        android:ems="10"
-        android:gravity="center"
-        android:inputType="number"
+        style="@style/default_code"
+        android:autofillHints="postalCode"
         app:layout_constraintBottom_toTopOf="@+id/guideline5"
         app:layout_constraintEnd_toStartOf="@+id/otpEditText5"
         app:layout_constraintHorizontal_bias="0.5"
@@ -97,14 +76,8 @@
 
     <EditText
         android:id="@+id/otpEditText5"
-        android:layout_width="45dp"
-        android:layout_height="45dp"
-        android:background="@color/Blue"
-        android:hint="0"
-        android:textColorHint="@color/Blue_2"
-        android:ems="10"
-        android:gravity="center"
-        android:inputType="number"
+        style="@style/default_code"
+        android:autofillHints="postalCode"
         app:layout_constraintBottom_toTopOf="@+id/guideline5"
         app:layout_constraintEnd_toStartOf="@+id/otpEditText6"
         app:layout_constraintHorizontal_bias="0.5"
@@ -114,15 +87,8 @@
 
     <EditText
         android:id="@+id/otpEditText6"
-        android:layout_width="45dp"
-        android:layout_height="45dp"
-        android:layout_marginEnd="16dp"
-        android:background="@color/Blue"
-        android:hint="0"
-        android:textColorHint="@color/Blue_2"
-        android:ems="10"
-        android:gravity="center"
-        android:inputType="number"
+        style="@style/default_code"
+        android:autofillHints="postalCode"
         app:layout_constraintBottom_toTopOf="@+id/guideline5"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/otpEditText5"
@@ -144,13 +110,15 @@
         app:layout_constraintGuide_percent="0.75" />
 
     <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="0dp"
-        android:layout_height="380dp"
+        android:id="@+id/otp_image"
+        android:layout_width="236dp"
+        android:layout_height="202dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/undraw_login"
+        android:contentDescription="@string/phone_disc_image"/>
 
     <ProgressBar
         android:id="@+id/otpProgressBar"
@@ -160,8 +128,26 @@
         android:indeterminateTint="@color/Blue"
         app:layout_constraintBottom_toTopOf="@+id/guideline4"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+        app:layout_constraintTop_toBottomOf="@+id/otp_image"
+        app:layout_constraintVertical_bias="0.222" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="70dp"
+        android:gravity="center"
+        android:text="@string/otp_text_title"
+        android:textColor="@color/Gray_6"
+        android:textSize="16sp"
+        android:textStyle="normal"
+        app:layout_constraintBottom_toTopOf="@+id/verifyOTPBtn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/otpProgressBar" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

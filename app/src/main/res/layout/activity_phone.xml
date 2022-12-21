@@ -10,17 +10,19 @@
     <EditText
         android:id="@+id/phoneEditTextNumber"
         android:layout_width="0dp"
-        android:layout_height="45dp"
+        android:layout_height="48dp"
         android:layout_marginStart="10dp"
         android:layout_marginEnd="32dp"
         android:layout_marginBottom="24dp"
-        android:background="@color/white"
+        android:autofillHints="phone"
+        android:background="@drawable/background_radius"
         android:ems="10"
         android:hint="@string/PA_input_text_phone"
-        android:inputType="number"
+        android:inputType="phone"
         android:paddingStart="16dp"
         android:textColor="@color/Gray"
         android:textColorHint="#606060"
+        android:textSize="15sp"
         app:layout_constraintBottom_toTopOf="@+id/sendOTPBtn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/editTextNumber2" />
@@ -43,40 +45,44 @@
     <EditText
         android:id="@+id/editTextNumber2"
         android:layout_width="50dp"
-        android:layout_height="45dp"
-        android:layout_marginStart="32dp"
-        android:background="@color/white"
+        android:layout_height="48dp"
+        android:layout_marginStart="35dp"
+        android:background="@drawable/background_radius"
         android:ems="10"
         android:enabled="false"
         android:inputType="number"
-        android:text="  +7"
+        android:text="@string/phone_7_number"
         android:textColor="@color/Gray"
+        android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="@+id/phoneEditTextNumber"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        android:autofillHints="" />
 
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="center"
         android:layout_marginBottom="32dp"
+        android:gravity="center"
         android:text="@string/PA_title_info_text"
-        android:textColor="@color/Gray_5"
+        android:textColor="#546E7A"
         android:textSize="16sp"
-        android:textStyle="bold"
+        android:textStyle="normal"
         app:layout_constraintBottom_toTopOf="@+id/editTextNumber2"
         app:layout_constraintStart_toStartOf="@+id/editTextNumber2" />
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="0dp"
-        android:layout_height="380dp"
+        android:layout_width="269dp"
+        android:layout_height="260dp"
+        android:layout_marginTop="50dp"
+        android:src="@drawable/auth_close"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:src="@drawable/auth_close"
-         />
+        android:contentDescription="@string/phone_disc_image"
+        />
 
     <ProgressBar
         android:id="@+id/phoneProgressBar"

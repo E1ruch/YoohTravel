@@ -1,7 +1,6 @@
 package com.example.yoohtravel
 
 import android.content.Intent
-import android.nfc.Tag
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -13,17 +12,16 @@ import android.widget.Toast
 import com.google.firebase.FirebaseException
 import com.google.firebase.FirebaseTooManyRequestsException
 import com.google.firebase.auth.*
-import com.google.firebase.auth.PhoneAuthOptions.*
 import com.google.firebase.auth.PhoneAuthProvider.*
 import java.util.concurrent.TimeUnit
 import java.util.concurrent.TimeUnit.*
 
 class PhoneActivity : AppCompatActivity() {
 
-    private lateinit var sendOTPBtn: Button
-    private lateinit var phoneNumberET: EditText
-    private lateinit var auth: FirebaseAuth
-    private lateinit var number: String
+    private lateinit var sendOTPBtn : Button
+    private lateinit var phoneNumberET : EditText
+    private lateinit var auth : FirebaseAuth
+    private lateinit var number : String
     private lateinit var mProgressBar : ProgressBar
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,31 +31,31 @@ class PhoneActivity : AppCompatActivity() {
         init()
         sendOTPBtn.setOnClickListener {
             number = phoneNumberET.text.trim().toString()
-            if (number.isNotEmpty()) {
-                if (number.length == 10) {
+            if (number.isNotEmpty()){
+                if (number.length == 10){
                     number = "+7$number"
                     mProgressBar.visibility = View.VISIBLE
                     val options = PhoneAuthOptions.newBuilder(auth)
-                        .setPhoneNumber(number)
-                        .setTimeout(60L, SECONDS)
-                        .setActivity(this)
-                        .setCallbacks(callbacks)
+                        .setPhoneNumber(number)       // Phone number to verify
+                        .setTimeout(60L, TimeUnit.SECONDS) // Timeout and unit
+                        .setActivity(this)                 // Activity (for callback binding)
+                        .setCallbacks(callbacks) // OnVerificationStateChangedCallbacks
                         .build()
                     verifyPhoneNumber(options)
 
-                } else {
-                    Toast.makeText(this, "Please Enter Corect number", Toast.LENGTH_SHORT).show()
+                }else{
+                    Toast.makeText(this , "Please Enter correct Number" , Toast.LENGTH_SHORT).show()
                 }
-            } else {
-                Toast.makeText(this, "Please Enter number", Toast.LENGTH_SHORT).show()
+            }else{
+                Toast.makeText(this , "Please Enter Number" , Toast.LENGTH_SHORT).show()
+
             }
         }
-
-
     }
-    private fun init() {
+
+    private fun init(){
         mProgressBar = findViewById(R.id.phoneProgressBar)
-        mProgressBar.visibility= View.INVISIBLE
+        mProgressBar.visibility = View.INVISIBLE
         sendOTPBtn = findViewById(R.id.sendOTPBtn)
         phoneNumberET = findViewById(R.id.phoneEditTextNumber)
         auth = FirebaseAuth.getInstance()
@@ -67,72 +65,73 @@ class PhoneActivity : AppCompatActivity() {
         auth.signInWithCredential(credential)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
-                    // Успешная регистрация, обновление пользовательского интерфейса с информацией о зарегистрированном пользователе
-                    Toast.makeText(this,"Authenticate Successfully" , Toast.LENGTH_SHORT).show()
+                    // Sign in success, update UI with the signed-in user's information
+                    Toast.makeText(this , "Authenticate Successfully" , Toast.LENGTH_SHORT).show()
                     sendToMain()
                 } else {
-                    // Вход в систему не удался, выведите сообщение и обновите пользовательский интерфейс
-                    Log.d("TAG","signInWithPhoneAuthCredential: ${task.exception.toString()}")
+                    // Sign in failed, display a message and update the UI
+                    Log.d("TAG", "signInWithPhoneAuthCredential: ${task.exception.toString()}")
                     if (task.exception is FirebaseAuthInvalidCredentialsException) {
-                        // введенный проверочный код недействителен
+                        // The verification code entered was invalid
                     }
-                    // Обновление пользовательского интерфейса
+                    // Update UI
                 }
+                mProgressBar.visibility = View.INVISIBLE
             }
     }
 
     private fun sendToMain(){
-        startActivity(Intent(this, MainActivity::class.java))
+        startActivity(Intent(this , MainActivity::class.java))
     }
-    private val callbacks = object : PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
+    private val callbacks = object : OnVerificationStateChangedCallbacks() {
 
         override fun onVerificationCompleted(credential: PhoneAuthCredential) {
-            // Этот обратный вызов будет вызываться в двух ситуациях:
-            // 1 - Мгновенная проверка. В некоторых случаях номер телефона можно мгновенно // проверить.
-            // верифицирован без необходимости отправлять или вводить проверочный код.
-            // 2 - Автопоиск. На некоторых устройствах службы Google Play могут автоматически
-            // обнаруживать входящее проверочное SMS и выполнять проверку без // действия пользователя.
-            // действия пользователя.
+            // This callback will be invoked in two situations:
+            // 1 - Instant verification. In some cases the phone number can be instantly
+            //     verified without needing to send or enter a verification code.
+            // 2 - Auto-retrieval. On some devices Google Play services can automatically
+            //     detect the incoming verification SMS and perform verification without
+            //     user action.
             signInWithPhoneAuthCredential(credential)
         }
 
         override fun onVerificationFailed(e: FirebaseException) {
-            // Этот обратный вызов вызывается в случае некорректного запроса на проверку,
-            // например, если формат телефонного номера недействителен.
+            // This callback is invoked in an invalid request for verification is made,
+            // for instance if the the phone number format is not valid.
 
             if (e is FirebaseAuthInvalidCredentialsException) {
-                // Неверный запрос
-                Log.d("TAG", "onVerificateFailer: ${e.toString()}")
+                // Invalid request
+                Log.d("TAG", "onVerificationFailed: ${e.toString()}")
             } else if (e is FirebaseTooManyRequestsException) {
-                // Квота SMS для проекта превышена
-                Log.d("TAG", "onVerificateFailer: ${e.toString()}")
-
+                // The SMS quota for the project has been exceeded
+                Log.d("TAG", "onVerificationFailed: ${e.toString()}")
             }
-
-            // Показать сообщение и обновить пользовательский интерфейс
+            mProgressBar.visibility = View.VISIBLE
+            // Show a message and update the UI
         }
 
         override fun onCodeSent(
             verificationId: String,
-            token: PhoneAuthProvider.ForceResendingToken
+            token: ForceResendingToken
         ) {
-            // Код проверки SMS был отправлен на указанный номер телефона, нам
-            // теперь нужно попросить пользователя ввести код, а затем создать
-            // комбинацию кода с идентификатором верификации.
-            // Сохраните идентификатор проверки и маркер повторной отправки, чтобы мы могли использовать их позже
-            val intent = Intent(this@PhoneActivity, OTPActivity::class.java)
-            intent.putExtra("OTP", verificationId)
-            intent.putExtra("resendToken", token)
+            // The SMS verification code has been sent to the provided phone number, we
+            // now need to ask the user to enter the code and then construct a credential
+            // by combining the code with a verification ID.
+            // Save verification ID and resending token so we can use them later
+            val intent = Intent(this@PhoneActivity , OTPActivity::class.java)
+            intent.putExtra("OTP" , verificationId)
+            intent.putExtra("resendToken" , token)
             intent.putExtra("phoneNumber" , number)
             startActivity(intent)
             mProgressBar.visibility = View.INVISIBLE
         }
     }
 
+
     override fun onStart() {
         super.onStart()
         if (auth.currentUser != null){
-            startActivity(Intent(this,MainActivity::class.java))
+            startActivity(Intent(this , MainActivity::class.java))
         }
     }
 }

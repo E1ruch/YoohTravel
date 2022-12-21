@@ -68,9 +68,11 @@ class PhoneActivity : AppCompatActivity() {
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
                     // Успешная регистрация, обновление пользовательского интерфейса с информацией о зарегистрированном пользователе
-
+                    Toast.makeText(this,"Authenticate Successfully" , Toast.LENGTH_SHORT).show()
+                    sendToMain()
                 } else {
                     // Вход в систему не удался, выведите сообщение и обновите пользовательский интерфейс
+                    Log.d("TAG","signInWithPhoneAuthCredential: ${task.exception.toString()}")
                     if (task.exception is FirebaseAuthInvalidCredentialsException) {
                         // введенный проверочный код недействителен
                     }
@@ -79,6 +81,9 @@ class PhoneActivity : AppCompatActivity() {
             }
     }
 
+    private fun sendToMain(){
+        startActivity(Intent(this, MainActivity::class.java))
+    }
     private val callbacks = object : PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
 
         override fun onVerificationCompleted(credential: PhoneAuthCredential) {
@@ -118,6 +123,7 @@ class PhoneActivity : AppCompatActivity() {
             val intent = Intent(this@PhoneActivity, OTPActivity::class.java)
             intent.putExtra("OTP", verificationId)
             intent.putExtra("resendToken", token)
+            intent.putExtra("phoneNumber" , number)
             startActivity(intent)
             mProgressBar.visibility = View.INVISIBLE
         }

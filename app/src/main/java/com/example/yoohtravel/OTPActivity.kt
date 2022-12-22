@@ -64,10 +64,10 @@ class OTPActivity : AppCompatActivity() {
                     progressBar.visibility = View.VISIBLE
                     signInWithPhoneAuthCredential(credential)
                 } else {
-                    Toast.makeText(this, "Please Enter Correct OTP", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "Пожалуйста, введите правильный код", Toast.LENGTH_SHORT).show()
                 }
             } else {
-                Toast.makeText(this, "Please Enter OTP", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Пожалуйста, введите код", Toast.LENGTH_SHORT).show()
             }
 
 
@@ -119,10 +119,10 @@ class OTPActivity : AppCompatActivity() {
 
             if (e is FirebaseAuthInvalidCredentialsException) {
                 // Invalid request
-                Log.d("TAG", "onVerificationFailed: ${e.toString()}")
+                Log.d("TAG", "Ошибка при верификации: ${e.toString()}")
             } else if (e is FirebaseTooManyRequestsException) {
                 // The SMS quota for the project has been exceeded
-                Log.d("TAG", "onVerificationFailed: ${e.toString()}")
+                Log.d("TAG", "Ошибка при верификации: ${e.toString()}")
             }
             progressBar.visibility = View.VISIBLE
             // Show a message and update the UI
@@ -147,7 +147,7 @@ class OTPActivity : AppCompatActivity() {
                 if (task.isSuccessful) {
                     // Sign in success, update UI with the signed-in user's information
 
-                    Toast.makeText(this, "Authenticate Successfully", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "Аутентификация прошла успешно", Toast.LENGTH_SHORT).show()
                     sendToMain()
                 } else {
                     // Sign in failed, display a message and update the UI

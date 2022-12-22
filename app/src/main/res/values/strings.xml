@@ -9,4 +9,6 @@
     <string name="OTP_submit">Подтвердить</string>
     <string name="otp_text_title">Введите 6-значный OTP-код, который был отправлен из SMS, чтобы завершить верификацию аккаунта.</string>
     <string name="sendcode_text">Отправить код повторно</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

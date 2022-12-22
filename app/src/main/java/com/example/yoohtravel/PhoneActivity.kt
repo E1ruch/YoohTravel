@@ -44,10 +44,10 @@ class PhoneActivity : AppCompatActivity() {
                     verifyPhoneNumber(options)
 
                 }else{
-                    Toast.makeText(this , "Please Enter correct Number" , Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this , "Пожалуйста, введите правильный номер" , Toast.LENGTH_SHORT).show()
                 }
             }else{
-                Toast.makeText(this , "Please Enter Number" , Toast.LENGTH_SHORT).show()
+                Toast.makeText(this , "Пожалуйста, введите номер" , Toast.LENGTH_SHORT).show()
 
             }
         }
@@ -66,7 +66,7 @@ class PhoneActivity : AppCompatActivity() {
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
                     // Sign in success, update UI with the signed-in user's information
-                    Toast.makeText(this , "Authenticate Successfully" , Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this , "Аутентификация прошла успешно" , Toast.LENGTH_SHORT).show()
                     sendToMain()
                 } else {
                     // Sign in failed, display a message and update the UI
@@ -101,10 +101,10 @@ class PhoneActivity : AppCompatActivity() {
 
             if (e is FirebaseAuthInvalidCredentialsException) {
                 // Invalid request
-                Log.d("TAG", "onVerificationFailed: ${e.toString()}")
+                Log.d("TAG", "Ошибка при верификации: ${e.toString()}")
             } else if (e is FirebaseTooManyRequestsException) {
                 // The SMS quota for the project has been exceeded
-                Log.d("TAG", "onVerificationFailed: ${e.toString()}")
+                Log.d("TAG", "Ошибка при верификации: ${e.toString()}")
             }
             mProgressBar.visibility = View.VISIBLE
             // Show a message and update the UI

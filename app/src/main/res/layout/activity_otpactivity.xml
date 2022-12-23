@@ -111,14 +111,15 @@
 
     <ImageView
         android:id="@+id/otp_image"
-        android:layout_width="236dp"
-        android:layout_height="202dp"
+        android:layout_width="319dp"
+        android:layout_height="281dp"
+        android:contentDescription="@string/phone_disc_image"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/undraw_login"
-        android:contentDescription="@string/phone_disc_image"/>
+        android:layout_marginTop="15dp"
+        app:srcCompat="@drawable/img_done_otp" />
 
     <ProgressBar
         android:id="@+id/otpProgressBar"

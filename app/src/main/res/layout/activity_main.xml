@@ -7,6 +7,18 @@
     android:background="@color/Background_white"
     tools:context=".MainActivity">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/my_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/white"
+        android:elevation="4dp"
+        app:titleTextColor="@color/Gray_6"
+        app:menu="@menu/tool_menu"
+        tools:ignore="MissingConstraints">
+
+    </androidx.appcompat.widget.Toolbar>
+
 
     <fragment
         android:id="@+id/fl_wrapper"
@@ -18,7 +30,7 @@
         app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/my_toolbar"
         app:navGraph="@navigation/main_navi" />
 
     <Button
@@ -44,6 +56,7 @@
         app:itemRippleColor="@color/Gray_6"
         android:fadingEdge="horizontal"
         app:menu="@menu/my_menu"
+        android:elevation="4dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">

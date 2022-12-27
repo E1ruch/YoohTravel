@@ -8,13 +8,12 @@ import android.view.Menu
 import android.view.MenuItem
 import android.widget.Button
 import android.widget.Toast
-import androidx.navigation.NavController
 import androidx.navigation.findNavController
-import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
-import com.ismaeldivita.chipnavigation.ChipNavigationBar
 
 class MainActivity : AppCompatActivity() {
 
@@ -26,31 +25,28 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(findViewById(R.id.my_toolbar))
-        supportActionBar?.title = "Как туда попасть?"
+
 
 
         //Отображение фрагмент-окон через NavBar
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottomNavigationView)
         val navController = findNavController(R.id.fl_wrapper)
+        val appBarConfiguration = AppBarConfiguration(setOf(R.id.homeFragment,R.id.favoriteFragment, R.id.profileFragment))
+        setupActionBarWithNavController(navController, appBarConfiguration)
        bottomNavigationView.setupWithNavController(navController)
 
 
 
 
-        auth = FirebaseAuth.getInstance()
-        signOutBtn = findViewById(R.id.signOutBtn)
-        signOutBtn.setOnClickListener{
-            auth.signOut()
-            startActivity(Intent(this, PhoneActivity::class.java))
-        }
 
     }
-
+        //ToolbarMenu
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.tool_menu, menu)
         return true
     }
 
+    //ToolBar
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId){
             android.R.id.home -> finish()

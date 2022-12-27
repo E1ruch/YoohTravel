@@ -31,6 +31,7 @@
     <color name="Yellow">#F2C94C</color>
 
     <color name="Background_white">#F9F9F9</color>
+    <color name="StatusColor">#80F9F9F9</color>
     <color name="navigationBarColor">#2F80ED</color>
 
 

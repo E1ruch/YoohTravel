@@ -15,7 +15,7 @@ import com.google.firebase.auth.*
 import com.google.firebase.auth.PhoneAuthProvider.*
 import java.util.concurrent.TimeUnit
 import java.util.concurrent.TimeUnit.*
-
+/*
 class PhoneActivity : AppCompatActivity() {
 
     private lateinit var sendOTPBtn : Button
@@ -135,3 +135,5 @@ class PhoneActivity : AppCompatActivity() {
         }
     }
 }
+
+ */

@@ -8,16 +8,16 @@
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.example.yoohtravel.ui.HomeFragment"
-        android:label="fragment_home"
+        android:label="Главная"
         tools:layout="@layout/fragment_home" />
     <fragment
         android:id="@+id/favoriteFragment"
         android:name="com.example.yoohtravel.ui.FavoriteFragment"
-        android:label="fragment_favorite"
+        android:label="Избранное"
         tools:layout="@layout/fragment_favorite" />
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.example.yoohtravel.ui.ProfileFragment"
-        android:label="fragment_profile"
+        android:label="Профиль"
         tools:layout="@layout/fragment_profile" />
 </navigation>

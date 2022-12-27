@@ -11,4 +11,7 @@
     <string name="sendcode_text">Отправить код повторно</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="SignIn_google_btn">Авторизоваться через google</string>
+    <string name="signIng_text_title">Пожалуйста, авторизуйтесь в приложении</string>
+    <string name="signin_title_text">Для входа в приложение, пожалуйста вторизуйтесь через сервис Google</string>
 </resources>

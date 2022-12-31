@@ -43,7 +43,7 @@ class SignInActivity : AppCompatActivity() {
         auth =  Firebase.auth
 
         launcher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
-        val task = GoogleSignIn.getSignedInAccountFromIntent(it.data)
+            val task = GoogleSignIn.getSignedInAccountFromIntent(it.data)
             try {
 
                 val account = task.getResult(ApiException::class.java)
@@ -55,7 +55,7 @@ class SignInActivity : AppCompatActivity() {
             }
         }
         binding.signinBtn.setOnClickListener{
-        signInWithGoogle()
+            signInWithGoogle()
         }
         checkAuthState()
     }

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    >
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
         android:id="@+id/search_toolbar"
@@ -11,11 +10,27 @@
         android:title="Поиск"
         />
 
-    <item
-        android:id="@+id/settings_toolbar"
-        android:icon="@drawable/ic_settings"
+
+    <item android:icon="@drawable/ic_more_vert"
+        app:showAsAction="ifRoom"
         android:iconTint="@color/Gray_5"
-        app:showAsAction="always"
-        android:title="Настройки"
-        />
+        android:title="">
+        <menu>
+
+
+            <item
+                android:id="@+id/settings_toolbar"
+                android:icon="@drawable/settings_cyrcle"
+                android:iconTint="@color/Gray_5"
+                app:showAsAction="never"
+                android:title="Настройки" />
+            <item android:id="@+id/signout_toolbar"
+                android:title="Выход"
+                android:icon="@drawable/ic_logout"
+                android:iconTint="@color/Gray_5"
+                app:showAsAction="never"/>
+        </menu>
+
+    </item>
+
 </menu>

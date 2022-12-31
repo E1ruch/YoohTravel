@@ -14,17 +14,19 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 
 class MainActivity : AppCompatActivity() {
 
 
     private lateinit var auth : FirebaseAuth
-    private lateinit var signOutBtn : Button
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(findViewById(R.id.my_toolbar))
+        auth =  Firebase.auth
 
 
 
@@ -36,17 +38,15 @@ class MainActivity : AppCompatActivity() {
        bottomNavigationView.setupWithNavController(navController)
 
 
-
-
-
     }
+
+
         //ToolbarMenu
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.tool_menu, menu)
-        return true
+        return super.onCreateOptionsMenu(menu)
     }
-
-    //ToolBar
+        //Выходим из аккаунта
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId){
             android.R.id.home -> finish()
@@ -55,6 +55,11 @@ class MainActivity : AppCompatActivity() {
             }
             R.id.settings_toolbar ->{
                 Toast.makeText(this,"Настройки(в разработке)", Toast.LENGTH_SHORT).show()
+            }
+            R.id.signout_toolbar -> {
+                auth.signOut()
+                //startActivity(Intent(this, SignInActivity::class.java))
+                finish()
             }
         }
         return true
